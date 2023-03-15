@@ -18,6 +18,7 @@ public class ZJsonUtil<T> {
     private static char LEFT_CURLY_BRACE = '{';
     private static char RIGHT_CURLY_BRACE = '}';
     private static char BLANK = ' ';
+    private static char UNDER_LINE = '_';
 
     /**
      * recode methods, save tme
@@ -68,6 +69,9 @@ public class ZJsonUtil<T> {
             switch (codeRule) {
                 case CAMELCASE:
                     filedName = camelcase(chars, filedNameStart, filedNameEnd - filedNameStart - 1);
+                    break;
+                case UNDER_LINE:
+                    filedName = underLine(chars, filedNameStart, filedNameEnd - filedNameStart - 1);
                     break;
                 default:
                     break;
@@ -121,7 +125,11 @@ public class ZJsonUtil<T> {
         /**
          * 驼峰
          */
-        CAMELCASE;
+        CAMELCASE,
+        /**
+         * 下划线
+         */
+        UNDER_LINE;
     }
 
     /**
@@ -129,13 +137,37 @@ public class ZJsonUtil<T> {
      * and The naming policy is camelcase
      *
      * @param chars
-     * @param filedNameStart
-     * @param filedNameEnd
+     * @param chars
+     * @param count
      * @return
      */
-    private static String camelcase(char[] chars, int filedNameStart, int filedNameEnd) {
-        chars[filedNameStart] -= 32;
-        return new String(chars, filedNameStart, filedNameEnd);
+    private static String camelcase(char[] chars, int start, int count) {
+        chars[start] -= 32;
+        return new String(chars, start, count);
+    }
+
+    /**
+     * support standard data, not support special char
+     *
+     * @param chars
+     * @param start
+     * @param count
+     * @return
+     */
+    private static String underLine(char[] chars, int start, int count) {
+        char[] newChar = new char[count];
+        newChar[0] = (char) (chars[0] - 32);
+        int j = 1;
+        for (int i = 1; i < count; i++) {
+            if (chars[start + i] == UNDER_LINE) {
+                newChar[j] = (char) (chars[start + i + 1] - 32);
+                i++;
+            } else {
+                newChar[j] = chars[start + i];
+            }
+            j++;
+        }
+        return new String(newChar, 0, j);
     }
 
 
