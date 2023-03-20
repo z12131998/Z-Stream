@@ -1,4 +1,4 @@
-package com.zhou.store;
+package com.zhou.stream.store;
 
 import java.util.HashMap;
 import java.util.Map;

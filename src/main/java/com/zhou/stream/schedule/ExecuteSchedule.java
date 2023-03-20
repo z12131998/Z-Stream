@@ -1,6 +1,4 @@
-package com.zhou.schedule;
-
-import java.util.concurrent.Executor;
+package com.zhou.stream.schedule;
 
 /**
  * 全局定时任务管理

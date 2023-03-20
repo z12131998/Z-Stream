@@ -1,4 +1,4 @@
-package com.zhou.utils;
+package com.zhou.stream.utils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

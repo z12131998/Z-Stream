@@ -1,4 +1,4 @@
-package com.zhou.schedule;
+package com.zhou.stream.schedule;
 
 /**
  * this schedule is time schedule
